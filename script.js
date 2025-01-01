@@ -8,6 +8,32 @@
 // - make toggle for read or not, with change bg color
 // - connect with the DOM
 
+// --- DOM manipulation and table row creation for a book ---
+const tbody = document.querySelector("tbody");
+
+function createBookRow(book) {
+  const newRow = document.createElement("tr");
+  const title = document.createElement("td");
+  const author = document.createElement("td");
+  const pages = document.createElement("td");
+  const read = document.createElement("td");
+  const deleteBtn = document.createElement("td");
+  title.textContent = `"${book.title}"`;
+  author.textContent = book.author;
+  pages.textContent = book.pages;
+  read.textContent = book.read ? "yes" : "no";
+  deleteBtn.textContent = "delete btn";
+  newRow.append(title, author, pages, read, deleteBtn);
+  return newRow;
+}
+
+function insertNewRow(bookRow) {
+  tbody.appendChild(bookRow);
+  return tbody.length;
+}
+// ---
+// creation of book objects and storing in library array
+
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
@@ -44,5 +70,12 @@ function displayLibrary() {
 addBookToLibrary("The lord of The Rings", "R. J. Tolkien", 200, false);
 addBookToLibrary("The lord of The Rings 2", "R. J. Tolkien", 358, false);
 addBookToLibrary("The Hobbit", "R. J. Tolkien", 546, true);
-displayLibrary();
-displayBooks();
+// displayLibrary();
+// displayBooks();
+
+// load book in the table
+
+myLibrary.map((book) => {
+  let newBookRow = createBookRow(book);
+  insertNewRow(newBookRow);
+});

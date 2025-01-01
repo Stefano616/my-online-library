@@ -47,19 +47,26 @@ main {
 }
 
 .book-list__table {
-  border: 2px solid var(--teal950);
-  border-collapse: collapse;
+  /* border: 2px solid var(--teal950); */
+  /* border-collapse: collapse; */
+  border-spacing: 0rem 1rem;
+  width: 70%;
+  margin-inline: auto;
 }
 
 th,
 td {
-  border: 2px solid var(--teal950);
+  border-block: 2px solid var(--teal950);
   padding: 0.5rem;
   text-align: left;
+  margin-bottom: 0.5rem;
+  min-width: 7rem;
 }
 
 td:nth-child(1) {
   background: var(--teal100);
+  border-left: 2px solid var(--teal950);
+  border-radius: 15px 0 0 15px;
 }
 td:nth-child(2) {
   background: var(--teal200);
@@ -72,4 +79,6 @@ td:nth-child(4) {
 }
 td:nth-child(5) {
   background: var(--teal500);
+  border-right: 2px solid var(--teal950);
+  border-radius: 0 15px 15px 0;
 }
