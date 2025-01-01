@@ -1,0 +1,75 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  --color1: #f0fdfa;
+  --color2: #ccfbf1;
+  --color3: #0d9488;
+  --color4: #042f2e;
+  ---teal50: #f0fdfa;
+  --teal100: #ccfbf1;
+  --teal200: #99f6e4;
+  --teal300: #5eead4;
+  --teal400: #2dd4bf;
+  --teal500: #14b8a6;
+  --teal600: #0d9488;
+  --teal700: #0f766e;
+  --teal800: #115e59;
+  --teal900: #134e4a;
+  --teal950: #042f2e;
+}
+body {
+  background-color: var(--teal100);
+  color: var(--teal950);
+}
+
+header {
+  padding: 1rem;
+  background-color: var(---teal50);
+  color: var(--teal950);
+}
+.container {
+  width: 90%;
+  margin-inline: auto;
+  text-align: center;
+}
+
+main {
+  padding-block: 2rem;
+}
+
+.book-list {
+  width: 90%;
+  margin-inline: auto;
+  background-color: var(---teal50);
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+.book-list__table {
+  border: 2px solid var(--teal950);
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 2px solid var(--teal950);
+  padding: 0.5rem;
+  text-align: left;
+}
+
+td:nth-child(1) {
+  background: var(--teal100);
+}
+td:nth-child(2) {
+  background: var(--teal200);
+}
+td:nth-child(3) {
+  background: var(--teal300);
+}
+td:nth-child(4) {
+  background: var(--teal400);
+}
+td:nth-child(5) {
+  background: var(--teal500);
+}
