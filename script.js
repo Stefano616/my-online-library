@@ -17,13 +17,19 @@ function createBookRow(book) {
   const author = document.createElement("td");
   const pages = document.createElement("td");
   const read = document.createElement("td");
-  const deleteBtn = document.createElement("td");
+  const tdDeleteBtn = document.createElement("td");
+  const deleteBtn = document.createElement("button");
+
   title.textContent = `"${book.title}"`;
   author.textContent = book.author;
   pages.textContent = book.pages;
   read.textContent = book.read ? "yes" : "no";
-  deleteBtn.textContent = "delete btn";
-  newRow.append(title, author, pages, read, deleteBtn);
+  deleteBtn.classList.add("deleteBtn");
+  deleteBtn.textContent = "Delete book";
+  deleteBtn.addEventListener("click", () => deleteBtn.parentNode.parentNode.remove());
+
+  tdDeleteBtn.appendChild(deleteBtn);
+  newRow.append(title, author, pages, read, tdDeleteBtn);
   return newRow;
 }
 

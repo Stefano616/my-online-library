@@ -82,3 +82,21 @@ td:nth-child(5) {
   border-right: 2px solid var(--teal950);
   border-radius: 0 15px 15px 0;
 }
+
+td:has(button) {
+  text-align: center;
+}
+
+.deleteBtn {
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  border: none;
+  background-color: var(--teal900);
+  color: var(--teal100);
+  transition: all 0.2s;
+}
+.deleteBtn:hover {
+  background-color: var(--teal950);
+  color: var(--teal300);
+  scale: 1.05;
+}
