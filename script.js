@@ -1,13 +1,12 @@
-// - create book constructor - OK
-// - add methods on the prototype - OK
-// - create empty library array - OK
-// - create function to populate the library with Book objects, based on input arguments, create and add book - OK
-// - Create function to display (access) the books - OK
-// - prepare the UI layout - OK
-// - make btn to delet book - Not removed the book from library - FIXED
-// - make toggle for read or not, with change bg color - OK
-
-// creation of book objects and storing in library array
+const tbody = document.querySelector("tbody");
+const showFormBtn = document.querySelector(".showFormBtn");
+const dialog = document.querySelector("dialog");
+const cancelBtn = document.querySelector("button[value='cancel']");
+const addBtn = document.querySelector("#addBtn");
+const inputTitle = document.querySelector("#book-title");
+const inputAuthor = document.querySelector("#book-author");
+const inputPages = document.querySelector("#book-pages");
+const inputRead = document.querySelector("#book-read");
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -50,9 +49,6 @@ addBookToLibrary("The lord of The Rings", "J. R. R. Tolkien", 200, false);
 addBookToLibrary("The lord of The Rings 2", "J. R. R. Tolkien", 358, false);
 addBookToLibrary("The Hobbit", "J. R. R. Tolkien", 546, true);
 
-// --- DOM manipulation and table row creation for a book ---
-const tbody = document.querySelector("tbody");
-
 function createBookRow(book, bookIndex) {
   const newRow = document.createElement("tr");
   const title = document.createElement("td");
@@ -88,17 +84,6 @@ function insertNewRow(bookRow) {
   tbody.appendChild(bookRow);
   return tbody.length;
 }
-// ---
-
-// Add button and modal handling
-const showFormBtn = document.querySelector(".showFormBtn");
-const dialog = document.querySelector("dialog");
-const cancelBtn = document.querySelector("button[value='cancel']");
-const addBtn = document.querySelector("#addBtn");
-const inputTitle = document.querySelector("#book-title");
-const inputAuthor = document.querySelector("#book-author");
-const inputPages = document.querySelector("#book-pages");
-const inputRead = document.querySelector("#book-read");
 
 showFormBtn.addEventListener("click", () => dialog.show());
 addBtn.addEventListener("click", (e) => {
@@ -111,10 +96,6 @@ addBtn.addEventListener("click", (e) => {
   insertNewRow(createBookRow(book, index));
   dialog.close();
 });
-
-// ---
-
-// load book in the table
 
 myLibrary.map((book, index) => {
   let newBookRow = createBookRow(book, index);
