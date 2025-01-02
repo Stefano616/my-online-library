@@ -36,6 +36,22 @@ header {
 
 main {
   padding-block: 2rem;
+  text-align: center;
+}
+main > button {
+  padding: 0.5rem 1rem;
+  margin-bottom: 2rem;
+  border-radius: 15px;
+  border: none;
+  background-color: var(--teal900);
+  color: var(--teal100);
+  transition: all 0.1s;
+}
+
+main > button:hover {
+  background-color: var(--teal950);
+  color: var(--teal300);
+  scale: 1.05;
 }
 
 .book-list {
@@ -93,10 +109,54 @@ td:has(button) {
   border: none;
   background-color: var(--teal900);
   color: var(--teal100);
-  transition: all 0.2s;
+  transition: all 0.1s;
 }
 .deleteBtn:hover {
   background-color: var(--teal950);
   color: var(--teal300);
   scale: 1.05;
+}
+
+dialog {
+  width: 20%;
+  min-width: 300px;
+  margin-inline: auto;
+  padding: 1rem 2rem;
+  color: var(--teal950);
+  border-radius: 15px;
+}
+dialog > form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+form button {
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  border: none;
+  background-color: var(--teal900);
+  color: var(--teal100);
+  transition: all 0.1s;
+}
+
+form button:hover {
+  background-color: var(--teal950);
+  color: var(--teal300);
+  scale: 1.05;
+}
+.input-block {
+  /* margin-bottom: 1rem; */
+  display: flex;
+  justify-content: space-between;
+  padding-right: 2rem;
+}
+
+.input-block:has(input[type="checkbox"]) {
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+form input {
+  padding: 0.2rem;
 }

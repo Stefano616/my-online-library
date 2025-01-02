@@ -3,8 +3,8 @@
 // - create empty library array - OK
 // - create function to populate the library with Book objects, based on input arguments, create and add book - OK
 // - Create function to display (access) the books - OK
-// - prepare the UI layout
-// - make btn to delet book
+// - prepare the UI layout - OK
+// - make btn to delet book - Not removed the book from library - to fix
 // - make toggle for read or not, with change bg color
 // - connect with the DOM
 
@@ -38,6 +38,7 @@ function insertNewRow(bookRow) {
   return tbody.length;
 }
 // ---
+
 // creation of book objects and storing in library array
 
 function Book(title, author, pages, read) {
@@ -73,11 +74,35 @@ function displayLibrary() {
   console.log(myLibrary);
 }
 
-addBookToLibrary("The lord of The Rings", "R. J. Tolkien", 200, false);
-addBookToLibrary("The lord of The Rings 2", "R. J. Tolkien", 358, false);
-addBookToLibrary("The Hobbit", "R. J. Tolkien", 546, true);
+addBookToLibrary("The lord of The Rings", "J. R. R. Tolkien", 200, false);
+addBookToLibrary("The lord of The Rings 2", "J. R. R. Tolkien", 358, false);
+addBookToLibrary("The Hobbit", "J. R. R. Tolkien", 546, true);
 // displayLibrary();
 // displayBooks();
+
+// Add button and modal handling
+const showFormBtn = document.querySelector(".showFormBtn");
+const dialog = document.querySelector("dialog");
+const cancelBtn = document.querySelector("button[value='cancel']");
+const addBtn = document.querySelector("#addBtn");
+const inputTitle = document.querySelector("#book-title");
+const inputAuthor = document.querySelector("#book-author");
+const inputPages = document.querySelector("#book-pages");
+const inputRead = document.querySelector("#book-read");
+
+showFormBtn.addEventListener("click", () => dialog.show());
+addBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  let book = addBookToLibrary(inputTitle.value, inputAuthor.value, inputPages.value, inputRead.checked);
+  inputTitle.value = "";
+  inputAuthor.value = "";
+  inputPages.value = undefined;
+  inputRead.checked = false;
+  insertNewRow(createBookRow(book));
+  dialog.close();
+});
+
+// ---
 
 // load book in the table
 
