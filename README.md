@@ -7,3 +7,11 @@ Practiced concepts:
 - DOM web API
 - HTML dialog element
 - HTML form 
+
+Possible improvements:
+- search input
+- add genre to the books
+- genre/other filter
+- better UI
+- form validation
+- book cover
