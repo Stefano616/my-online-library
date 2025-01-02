@@ -4,14 +4,13 @@
 // - create function to populate the library with Book objects, based on input arguments, create and add book - OK
 // - Create function to display (access) the books - OK
 // - prepare the UI layout - OK
-// - make btn to delet book - Not removed the book from library - to fix
+// - make btn to delet book - Not removed the book from library - FIXED
 // - make toggle for read or not, with change bg color
-// - connect with the DOM
 
 // --- DOM manipulation and table row creation for a book ---
 const tbody = document.querySelector("tbody");
 
-function createBookRow(book) {
+function createBookRow(book, bookIndex) {
   const newRow = document.createElement("tr");
   const title = document.createElement("td");
   const author = document.createElement("td");
@@ -20,13 +19,18 @@ function createBookRow(book) {
   const tdDeleteBtn = document.createElement("td");
   const deleteBtn = document.createElement("button");
 
+  newRow.setAttribute("data-index-book", bookIndex);
+
   title.textContent = `"${book.title}"`;
   author.textContent = book.author;
   pages.textContent = book.pages;
   read.textContent = book.read ? "yes" : "no";
   deleteBtn.classList.add("deleteBtn");
   deleteBtn.textContent = "Delete book";
-  deleteBtn.addEventListener("click", () => deleteBtn.parentNode.parentNode.remove());
+  deleteBtn.addEventListener("click", () => {
+    myLibrary.splice(bookIndex, 1);
+    deleteBtn.parentNode.parentNode.remove();
+  });
 
   tdDeleteBtn.appendChild(deleteBtn);
   newRow.append(title, author, pages, read, tdDeleteBtn);
@@ -60,7 +64,7 @@ const myLibrary = [];
 function addBookToLibrary(title, author, pages, read) {
   const bookToAdd = new Book(title, author, pages, read);
   myLibrary.push(bookToAdd);
-  return bookToAdd;
+  return [bookToAdd, myLibrary.length - 1];
 }
 
 function displayBooks() {
@@ -77,8 +81,6 @@ function displayLibrary() {
 addBookToLibrary("The lord of The Rings", "J. R. R. Tolkien", 200, false);
 addBookToLibrary("The lord of The Rings 2", "J. R. R. Tolkien", 358, false);
 addBookToLibrary("The Hobbit", "J. R. R. Tolkien", 546, true);
-// displayLibrary();
-// displayBooks();
 
 // Add button and modal handling
 const showFormBtn = document.querySelector(".showFormBtn");
@@ -93,12 +95,12 @@ const inputRead = document.querySelector("#book-read");
 showFormBtn.addEventListener("click", () => dialog.show());
 addBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  let book = addBookToLibrary(inputTitle.value, inputAuthor.value, inputPages.value, inputRead.checked);
+  let [book, index] = addBookToLibrary(inputTitle.value, inputAuthor.value, inputPages.value, inputRead.checked);
   inputTitle.value = "";
   inputAuthor.value = "";
-  inputPages.value = undefined;
+  inputPages.value = "";
   inputRead.checked = false;
-  insertNewRow(createBookRow(book));
+  insertNewRow(createBookRow(book, index));
   dialog.close();
 });
 
@@ -106,7 +108,7 @@ addBtn.addEventListener("click", (e) => {
 
 // load book in the table
 
-myLibrary.map((book) => {
-  let newBookRow = createBookRow(book);
+myLibrary.map((book, index) => {
+  let newBookRow = createBookRow(book, index);
   insertNewRow(newBookRow);
 });
