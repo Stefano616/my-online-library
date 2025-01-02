@@ -5,43 +5,7 @@
 // - Create function to display (access) the books - OK
 // - prepare the UI layout - OK
 // - make btn to delet book - Not removed the book from library - FIXED
-// - make toggle for read or not, with change bg color
-
-// --- DOM manipulation and table row creation for a book ---
-const tbody = document.querySelector("tbody");
-
-function createBookRow(book, bookIndex) {
-  const newRow = document.createElement("tr");
-  const title = document.createElement("td");
-  const author = document.createElement("td");
-  const pages = document.createElement("td");
-  const read = document.createElement("td");
-  const tdDeleteBtn = document.createElement("td");
-  const deleteBtn = document.createElement("button");
-
-  newRow.setAttribute("data-index-book", bookIndex);
-
-  title.textContent = `"${book.title}"`;
-  author.textContent = book.author;
-  pages.textContent = book.pages;
-  read.textContent = book.read ? "yes" : "no";
-  deleteBtn.classList.add("deleteBtn");
-  deleteBtn.textContent = "Delete book";
-  deleteBtn.addEventListener("click", () => {
-    myLibrary.splice(bookIndex, 1);
-    deleteBtn.parentNode.parentNode.remove();
-  });
-
-  tdDeleteBtn.appendChild(deleteBtn);
-  newRow.append(title, author, pages, read, tdDeleteBtn);
-  return newRow;
-}
-
-function insertNewRow(bookRow) {
-  tbody.appendChild(bookRow);
-  return tbody.length;
-}
-// ---
+// - make toggle for read or not, with change bg color - OK
 
 // creation of book objects and storing in library array
 
@@ -57,6 +21,10 @@ Book.prototype.info = function () {
     this.read ? "read already" : "not read yet"
   }`;
   return bookInfo;
+};
+
+Book.prototype.toggleReadStatus = function (checked) {
+  return checked ? (this.read = true) : (this.read = false);
 };
 
 const myLibrary = [];
@@ -81,6 +49,46 @@ function displayLibrary() {
 addBookToLibrary("The lord of The Rings", "J. R. R. Tolkien", 200, false);
 addBookToLibrary("The lord of The Rings 2", "J. R. R. Tolkien", 358, false);
 addBookToLibrary("The Hobbit", "J. R. R. Tolkien", 546, true);
+
+// --- DOM manipulation and table row creation for a book ---
+const tbody = document.querySelector("tbody");
+
+function createBookRow(book, bookIndex) {
+  const newRow = document.createElement("tr");
+  const title = document.createElement("td");
+  const author = document.createElement("td");
+  const pages = document.createElement("td");
+  const read = document.createElement("td");
+  const readToggle = document.createElement("input");
+  readToggle.type = "checkbox";
+  const tdDeleteBtn = document.createElement("td");
+  const deleteBtn = document.createElement("button");
+
+  newRow.setAttribute("data-index-book", bookIndex);
+
+  title.textContent = `"${book.title}"`;
+  author.textContent = book.author;
+  pages.textContent = book.pages;
+  book.read ? (readToggle.checked = true) : (readToggle.checked = false);
+  readToggle.addEventListener("change", () => myLibrary[bookIndex].toggleReadStatus(readToggle.checked));
+  read.appendChild(readToggle);
+  deleteBtn.classList.add("deleteBtn");
+  deleteBtn.textContent = "Delete book";
+  deleteBtn.addEventListener("click", () => {
+    myLibrary.splice(bookIndex, 1);
+    deleteBtn.parentNode.parentNode.remove();
+  });
+
+  tdDeleteBtn.appendChild(deleteBtn);
+  newRow.append(title, author, pages, read, tdDeleteBtn);
+  return newRow;
+}
+
+function insertNewRow(bookRow) {
+  tbody.appendChild(bookRow);
+  return tbody.length;
+}
+// ---
 
 // Add button and modal handling
 const showFormBtn = document.querySelector(".showFormBtn");
